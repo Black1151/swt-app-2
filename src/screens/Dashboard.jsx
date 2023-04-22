@@ -1,9 +1,8 @@
 import React from 'react';
-import { ScrollView, View, Text } from 'native-base';
+import { ScrollView, View, Text, VStack, HStack } from 'native-base';
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import theme from '../../theme/theme';
-
 
 const students = [
   {
@@ -83,50 +82,62 @@ const Dashboard = () => {
   const navigation = useNavigation();
 
   const handleStudentPress = (id) => {
-    navigation.navigate('StudentProfile', { id });
+    navigation.navigate('StudentProfile');
   };
 
   return (
     <ScrollView bg={theme.colors.gray[50]} p={4}>
-      {students.map((student) => (
-        <TouchableOpacity
-          key={student.id}
-          bg="white"
-          borderRadius={10}
-          p={3}
-          mb={3}
-          flexDirection="row"
-          alignItems="center"
-          onPress={() => handleStudentPress(student.id)}
-        >
-          <View
-            bg={theme.colors.primary[500]}
-            borderRadius={25}
-            width={50}
-            height={50}
-            alignItems="center"
-            justifyContent="center"
-            mr={3}
+      <VStack space={8}>
+        {students.map((student, index) => (
+          <TouchableOpacity
+            key={student.id}
+            style={{
+              backgroundColor: index % 2 === 0 ? 'white' : theme.colors.gray[50],
+              paddingVertical: 12,
+              paddingHorizontal: 16,
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 8,
+              marginBottom: 8,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+            onPress={() => handleStudentPress(student.id)}
           >
-            <Text fontSize={20} color="white">
-              {student.name[0]}
-            </Text>
-          </View>
-          <View>
-            <Text fontWeight="bold" fontSize={18} mb={1}>
-              {student.name}
-            </Text>
-            <Text fontSize={16} color={theme.colors.gray[700]} mb={1}>
-              {student.email}
-            </Text>
-            <Text fontSize={16} color={theme.colors.gray[700]}>
-              Grade: {student.grade}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      ))}
+            <HStack>
+              <View
+                bg={theme.colors.primary[500]}
+                borderRadius={25}
+                width={50}
+                height={50}
+                alignItems="center"
+                justifyContent="center"
+                mr={3}
+              >
+                <Text fontSize={20} color="white">
+                  {student.name[0]}
+                </Text>
+              </View>
+              <View>
+                <Text fontWeight="bold" fontSize={18} mb={1}>
+                  {student.name}
+                </Text>
+                <Text fontSize={16} color={theme.colors.gray[700]} mb={1}>
+                  {student.email}
+                </Text>
+                <Text fontSize={16} color={theme.colors.gray[700]}>
+                  Grade: {student.grade}
+                </Text>
+              </View> 
+            </HStack>
+          </TouchableOpacity>
+        ))}
+      </VStack>
     </ScrollView>
   );
 };
+
+
 
 export default Dashboard;

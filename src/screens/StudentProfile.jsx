@@ -3,7 +3,7 @@ import { ScrollView, VStack, HStack, Text, Heading, Badge, Button } from 'native
 import { useNavigation } from '@react-navigation/native';
 import theme from '../../theme/theme';
 
-const StudentProfilePage = () => {
+const StudentProfile = () => {
   const navigation = useNavigation();
   const student = {
     name: 'John Doe',
@@ -44,4 +44,4 @@ const StudentProfilePage = () => {
   );
 };
 
-export default StudentProfilePage;
+export default StudentProfile;

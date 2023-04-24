@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  NativeBaseProvider,
-  extendTheme,
-} from "native-base";
+import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { StackNavigation } from "./src/navigation/StackNavigation";
 import { theme } from "./theme/theme";

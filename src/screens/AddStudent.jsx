@@ -27,7 +27,8 @@ const AddStudent = () => {
       const newStudent = {
         first_name: firstName,
         last_name: lastName,
-        year,
+        year: parseInt(year),
+        behavior_score: 1000
       };
       
       const outcome = await addStudentAPI(newStudent)

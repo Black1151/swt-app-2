@@ -3,8 +3,7 @@ import { ScrollView, View, Text, VStack, HStack, Button, Center } from 'native-b
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import theme from '../../theme/theme';
-import { getAllStudentsAPI } from '../../api/api';
-
+import { getAllStudentsAPI, getStudentAPI } from '../../api/api';
 
 const Dashboard = () => {
   const [students, setStudents] = useState();
@@ -13,14 +12,16 @@ const Dashboard = () => {
     const fetchStudents = async () => {
        const fetchedStudents = await getAllStudentsAPI();
        setStudents(fetchedStudents);
+       console.log(students)
      };
     fetchStudents();
   }, []);
 
   const navigation = useNavigation();
   
-  const handleStudentPress = (id) => {
-    navigation.navigate('StudentProfile');
+  const handleStudentPress = async (id) => {
+    const student = await getStudentAPI(id)
+    navigation.navigate('StudentProfile', {student});
   };
 
   return (
@@ -72,7 +73,6 @@ const Dashboard = () => {
                   </Text>
                   <Text fontSize={16}>Behaviour: {student.behavior_score}</Text>
                 </View>
-             
               </HStack>
             </TouchableOpacity>
           ))}

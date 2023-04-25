@@ -4,8 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/core';
 import theme from '../../theme/theme';
 import { addGoalAPI, getAllGoalsAPI } from '../../api/api';
-import { TouchableOpacity } from 'react-native'
-
+import { TouchableOpacity } from 'react-native';
 
 const StudentProfile = () => {
   const navigation = useNavigation();
@@ -14,59 +13,61 @@ const StudentProfile = () => {
   const [goalList, setGoalList] = useState([]);
 
   const handleAddGoal = async () => {
-    addGoalAPI(student.id, newGoal)
+    await addGoalAPI(student.id, newGoal);
     setNewGoal('');
-    const updatedGoals = await getAllGoalsAPI(student.id);
-    setGoalList(updatedGoals);
+    getGoals();
+  };
+
+  const getGoals = async () => {
+    let _goals = await getAllGoalsAPI(student.id);
+    setGoalList(_goals);
   };
 
   useEffect(() => {
-    const getGoals = async () => {
-      let _goals = await getAllGoalsAPI(student.id);
-      setGoalList(_goals); 
-    };
-    getGoals(); 
+    getGoals();
   }, []);
 
   return (
-    <ScrollView>
-      <VStack p={4} space={4}>
+    <VStack flex={1}>
+      <VStack p={4} flex={1} space={2}s>
         <Heading size="xl">{student.first_name} {student.last_name}</Heading>
         <Text fontSize="md">Year: {student.year}</Text>
-        <Text
-          fontSize="md"
-        >Student behaviour: {student.behavior_score}</Text>
+        <Text pb={4} fontSize="md">Student behaviour: {student.behavior_score}</Text>
         <Heading size="md">Goals:</Heading>
-        <VStack space={2} divider={<Text fontSize="sm">|</Text>}>
-        {goalList[0] ? goalList.map((goal, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => navigation.navigate('StudentGoal', { goal })}
-          >
-            <HStack
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Text fontSize="md">{goal.title}</Text>
-              <Badge variant="solid" colorScheme={theme.colors.primary[500]}>
-                {goal.status}
-              </Badge>
-            </HStack>
-          </TouchableOpacity>
-        )) : <Text>No goals set, please add below</Text>
-        }
-        </VStack>
-        <Input
-          placeholder="Goal to add"
-          value={newGoal}
-          onChangeText={setNewGoal}
-          mb={4}
-        />
-        <Button colorScheme="primary" onPress={handleAddGoal}>
-          Add Goal
-        </Button>
+        <ScrollView flex={1}>
+          <VStack space={8}>
+            {goalList[0] ? goalList.map((goal, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => navigation.navigate('StudentGoal', { goal })}
+              >
+                <HStack
+                  alignItems="center"
+                  justifyContent="space-between"
+                  borderWidth={1}
+                  borderColor={theme.colors.gray[300]}
+                  borderRadius={4}
+                  p={4}
+                  bg="white"
+                >
+                  <Text fontSize="md">{goal.title}</Text>
+                  <Badge variant="solid" colorScheme={theme.colors.primary[500]}>
+                    {goal.status}
+                  </Badge>
+                </HStack>
+              </TouchableOpacity>
+            )) : <Text>No goals set, please add below</Text>}
+          </VStack>
+        </ScrollView>
       </VStack>
-    </ScrollView>
+      <VStack roundedTop={30} bg="primary.100" p={4} >
+        <Text fontSize="md" mb={2}>Add a new goal</Text>
+        <Input bg="white" value={newGoal} onChangeText={setNewGoal} mb={4} />
+        { newGoal ==! "" && <Button colorScheme="primary" onPress={handleAddGoal} >
+          Add Goal
+        </Button>}
+      </VStack>
+    </VStack>
   );
 };
 

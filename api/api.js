@@ -13,6 +13,7 @@ const apiCall = async (method, url, data) => {
   }
 };
 
+// Fetch all students
 export const getAllStudentsAPI = async () => {
   const response = await apiCall(
     "get",
@@ -22,6 +23,16 @@ export const getAllStudentsAPI = async () => {
   return response.data;
 };
 
+// Fetch single student
+export const getStudentAPI = async (id) => {
+  const response = await apiCall(
+    "get",
+    `http://${server}:${port}/api/students/${id}`
+  );
+  return response.data;
+};
+
+// Add a student
 export const addStudentAPI = async (student) => {
   const response = await apiCall(
     "post",
@@ -31,7 +42,8 @@ export const addStudentAPI = async (student) => {
   return response.status;
 };
 
-export const updateBehaviorScoreAPI = async (studentId, behaviorScore) => {
+// update behaviour
+export const updateBehaviourScoreAPI = async (studentId, behaviorScore) => {
   const response = await apiCall(
     "put",
     `http://${server}:${port}/api/students/${studentId}/behavior_score`,
@@ -40,15 +52,26 @@ export const updateBehaviorScoreAPI = async (studentId, behaviorScore) => {
   return response.status;
 };
 
-export const addGoalAPI = async (studentId, goal) => {
+// Get all goals
+export const getAllGoalsAPI = async (studentId) => {
+  const response = await apiCall(
+    "get",
+    `http://${server}:${port}/api/students/${studentId}/goals`
+  );
+  return response.data;
+};
+
+// add a goal
+export const addGoalAPI = async (studentId, title) => {
   const response = await apiCall(
     "post",
     `http://${server}:${port}/api/students/${studentId}/goals`,
-    goal
+    { title }
   );
   return response.status;
 };
 
+// update a goals status
 export const updateGoalStatusAPI = async (studentId, goalIndex, status) => {
   const response = await apiCall(
     "put",
@@ -58,6 +81,7 @@ export const updateGoalStatusAPI = async (studentId, goalIndex, status) => {
   return response.status;
 };
 
+// add evidence for a goal
 export const addEvidenceAPI = async (studentId, goalIndex, evidence) => {
   const response = await apiCall(
     "post",

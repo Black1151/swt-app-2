@@ -17,7 +17,6 @@ const apiCall = async (method, url, data) => {
 // Fetch all students
 export const getAllStudentsAPI = async () => {
   const response = await apiCall("get", studentsUrl);
-  console.log("response", response.data);
   return response.data;
 };
 

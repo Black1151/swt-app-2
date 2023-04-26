@@ -21,13 +21,13 @@ const Dashboard = () => {
   
   const handleStudentPress = async (id) => {
     const student = await getStudentAPI(id)
-    navigation.navigate('StudentProfile', {student});
+    navigation.navigate('Student Profile', {student});
   };
 
   return (
     <>
     <Button
-      onPress={()=> navigation.navigate('AddStudent')}
+      onPress={()=> navigation.navigate('Add Student')}
     >Add student</Button>
       <ScrollView bg={theme.colors.gray[50]} p={4}>
         <VStack space={8}>
@@ -59,9 +59,9 @@ const Dashboard = () => {
                     justifyContent="center"
                     mr={3}
                   >
-                      <Text fontSize={20} color="white">
-                        {student.first_name[0]}
-                      </Text>
+                    <Text fontSize={20} color="white">
+                      {student.first_name[0]}
+                    </Text>
                   </View>
                 </Center>
                 <View>

@@ -5,6 +5,7 @@ import { useRoute } from '@react-navigation/core';
 import theme from '../../theme/theme';
 import { addGoalAPI, getAllGoalsAPI } from '../../api/api';
 import { TouchableOpacity } from 'react-native';
+import GoalStatusWidget from '../components/goals/GoalStatusWidget';
 
 const StudentProfile = () => {
   const navigation = useNavigation();
@@ -39,7 +40,7 @@ const StudentProfile = () => {
             {goalList[0] ? goalList.map((goal, index) => (
               <TouchableOpacity
                 key={index}
-                onPress={() => navigation.navigate('StudentGoal', { goal })}
+                onPress={() => navigation.navigate('Goal Details', { goal })}
               >
                 <HStack
                   alignItems="center"
@@ -50,10 +51,9 @@ const StudentProfile = () => {
                   p={4}
                   bg="white"
                 >
+                  {console.log(goal.status)}
                   <Text fontSize="md">{goal.title}</Text>
-                  <Badge variant="solid" colorScheme={theme.colors.primary[500]}>
-                    {goal.status}
-                  </Badge>
+                  <GoalStatusWidget status={goal.status} />
                 </HStack>
               </TouchableOpacity>
             )) : <Text>No goals set, please add below</Text>}
@@ -63,7 +63,7 @@ const StudentProfile = () => {
       <VStack roundedTop={30} bg="primary.100" p={4} >
         <Text fontSize="md" mb={2}>Add a new goal</Text>
         <Input bg="white" value={newGoal} onChangeText={setNewGoal} mb={4} />
-        { newGoal ==! "" && <Button colorScheme="primary" onPress={handleAddGoal} >
+        { newGoal !== "" && <Button colorScheme="primary" onPress={handleAddGoal} >
           Add Goal
         </Button>}
       </VStack>

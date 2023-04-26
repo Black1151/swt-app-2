@@ -7,9 +7,6 @@ interface Props {
 }
 
 const GoalStatusWidget = ({ status }: Props) => {
-
-  console.log(status)
-
   return (
     <Badge variant="solid" colorScheme={theme.colors.primary[500]}>
       {status}

@@ -12,7 +12,6 @@ const Dashboard = () => {
     const fetchStudents = async () => {
        const fetchedStudents = await getAllStudentsAPI();
        setStudents(fetchedStudents);
-       console.log(students)
      };
     fetchStudents();
   }, []);

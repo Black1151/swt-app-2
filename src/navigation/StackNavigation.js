@@ -1,6 +1,12 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Dashboard, StudentProfile, AddStudent, GoalDetails } from "../screens";
+import {
+  Dashboard,
+  StudentProfile,
+  AddStudent,
+  GoalDetails,
+  AddProgress,
+} from "../screens";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +17,7 @@ export const StackNavigation = () => {
       <Stack.Screen name="Student Profile" component={StudentProfile} />
       <Stack.Screen name="Add Student" component={AddStudent} />
       <Stack.Screen name="Goal Details" component={GoalDetails} />
+      <Stack.Screen name="Add Progress" component={AddProgress} />
     </Stack.Navigator>
   );
 };

@@ -3,17 +3,18 @@ import { Box, VStack, HStack, Text, Image, Center, Button, Heading } from 'nativ
 import { useRoute } from '@react-navigation/core';
 import GoalStatusWidget from '../components/goals/GoalStatusWidget';
 import BodyWrapper from '../components/wrappers/BodyWrapper';
-import dayjs from 'dayjs';
 import { formatDateSix } from '../helpers/helpers';
+import { useNavigation } from '@react-navigation/native';
 
-const GoalDetails = ({ goalId }) => {
+
+const GoalDetails = () => {
     const { goal } = useRoute().params;
     const [evidence, setEvidence] = useState([]);
 
-    // fetch evidence logic 
+    const navigation = useNavigation();
 
     const handleAddEvidence = () => {
-        // add logic to handle adding evidence
+        navigation.navigate("Add Progress", { goal })
     };
 
     return (

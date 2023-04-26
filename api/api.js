@@ -57,20 +57,20 @@ export const addGoalAPI = async (studentId, title) => {
 };
 
 // update a goals status
-export const updateGoalStatusAPI = async (studentId, goalIndex, status) => {
+export const updateGoalStatusAPI = async (studentId, status) => {
   const response = await apiCall(
     "put",
-    `${studentsUrl}${studentId}/goals/${goalIndex}/status`,
+    `${studentsUrl}goals/${studentId}/status`,
     { status }
   );
   return response.status;
 };
 
 // add evidence for a goal
-export const addEvidenceAPI = async (studentId, goalIndex, evidence) => {
+export const addEvidenceAPI = async (studentId, evidence) => {
   const response = await apiCall(
     "post",
-    `${studentsUrl}${studentId}/goals/${goalIndex}/evidence`,
+    `${studentsUrl}/goals/evidence/${studentId}`,
     evidence
   );
   return response.status;

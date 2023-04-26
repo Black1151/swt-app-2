@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, VStack, HStack, Text, Heading, Badge, Button, Input } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import theme from '../../theme/theme';
 import { addGoalAPI, getAllGoalsAPI } from '../../api/api';
 import { TouchableOpacity } from 'react-native';

@@ -45,13 +45,13 @@ export const updateBehaviourScoreAPI = async (studentId, behaviorScore) => {
 
 // Get all goals
 export const getAllGoalsAPI = async (studentId) => {
-  const response = await apiCall("get", `${studentsUrl}${studentId}/goals`);
+  const response = await apiCall("get", `${studentsUrl}goals/${studentId}`);
   return response.data;
 };
 
 // add a goal
 export const addGoalAPI = async (studentId, title) => {
-  const response = await apiCall("post", `${studentsUrl}${studentId}/goals`, {
+  const response = await apiCall("post", `${studentsUrl}goals/${studentId}`, {
     title,
   });
   return response.status;

@@ -51,7 +51,6 @@ const StudentProfile = () => {
                   p={4}
                   bg="white"
                 >
-                  {console.log(goal.status)}
                   <Text fontSize="md">{goal.title}</Text>
                   <GoalStatusWidget status={goal.status} />
                 </HStack>
